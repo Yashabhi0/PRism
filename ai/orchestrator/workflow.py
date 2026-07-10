@@ -186,24 +186,24 @@ async def rag_retrieval_node(state: GraphState) -> GraphState:
 
 async def parallel_agents_node(state: GraphState) -> GraphState:
     """
-    Runs all 7 specialist agents sequentially in two batches with a short
-    delay between batches to stay within Groq's free-tier TPM limit (12k/min).
+    Runs all 7 specialist agents concurrently via asyncio.gather().
+    Gemini has a 1M TPM limit so all agents can fire at the same time.
     """
     t0 = time.perf_counter()
 
-    batch1 = [SecurityAgent(), CodeQualityAgent(), TestingAgent()]
-    batch2 = [ArchitectureAgent(), DocumentationAgent(), PerformanceAgent(), DependencyAgent()]
+    agents = [
+        SecurityAgent(),
+        CodeQualityAgent(),
+        TestingAgent(),
+        ArchitectureAgent(),
+        DocumentationAgent(),
+        PerformanceAgent(),
+        DependencyAgent(),
+    ]
 
-    logger.info("parallel_agents: launching batch 1 (%d agents)", len(batch1))
-    results1 = await asyncio.gather(*[a.run(state) for a in batch1])
+    logger.info("parallel_agents: launching %d agents concurrently", len(agents))
+    results = await asyncio.gather(*[a.run(state) for a in agents])
 
-    # Brief pause between batches to respect TPM limits on free-tier Groq
-    await asyncio.sleep(4)
-
-    logger.info("parallel_agents: launching batch 2 (%d agents)", len(batch2))
-    results2 = await asyncio.gather(*[a.run(state) for a in batch2])
-
-    all_results = list(results1) + list(results2)
     (
         state.security_result,
         state.code_quality_result,
@@ -212,15 +212,16 @@ async def parallel_agents_node(state: GraphState) -> GraphState:
         state.documentation_result,
         state.performance_result,
         state.dependency_result,
-    ) = all_results
+    ) = results
 
-    for r in all_results:
+    for r in results:
         state.token_usage.add(r.prompt_tokens, r.output_tokens)
 
-    total_issues = sum(r.total_issue_count for r in all_results)
-    blocking     = sum(r.blocking_issue_count for r in all_results)
-    logger.info("parallel_agents: complete. total_issues=%d blocking=%d", total_issues, blocking)
-
+    total_issues = sum(r.total_issue_count for r in results)
+    blocking     = sum(r.blocking_issue_count for r in results)
+    logger.info(
+        "parallel_agents: complete. total_issues=%d blocking=%d", total_issues, blocking
+    )
     state.execution_metrics.record("parallel_agents", time.perf_counter() - t0)
     return state
 

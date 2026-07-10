@@ -102,7 +102,7 @@ class Settings(BaseSettings):
     # ── Model names ───────────────────────────────────────────────────────────
     openai_model:    str = Field(default="gpt-4o")
     anthropic_model: str = Field(default="claude-3-5-sonnet-20241022")
-    gemini_model:    str = Field(default="gemini-1.5-pro")
+    gemini_model:    str = Field(default="gemini-2.0-flash-lite")
     groq_model:      str = Field(default="llama3-8b-8192")
 
     # ── Embedding Model names ─────────────────────────────────────────────────

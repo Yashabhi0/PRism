@@ -374,11 +374,17 @@ class BaseAgent(ABC):
         from backend.config import LLMProvider
 
         provider = self._settings.default_llm_provider
-        if provider == LLMProvider.GEMINI:
+
+        # Only use GeminiWrapper if provider is explicitly Gemini AND key is set
+        if provider == LLMProvider.GEMINI and self._settings.google_api_key:
             return GeminiWrapper()
-        if provider == LLMProvider.OPENAI:
+
+        # Only use OpenAIWrapper if provider is explicitly OpenAI AND key is set
+        if provider == LLMProvider.OPENAI and self._settings.openai_api_key:
             return OpenAIWrapper()
-        # For Groq, Anthropic, OpenRouter, Azure, Ollama — use a universal wrapper
+
+        # For all other providers (Groq, Anthropic, OpenRouter, Azure, Ollama)
+        # — or as fallback when a key is missing — use the universal wrapper
         return _UniversalLLMWrapper(provider)
 
     def _truncate_diff(self, diff_text: str) -> tuple[str, bool]:

@@ -171,14 +171,30 @@ class AnalysisService:
             raw_result = await graph.ainvoke(state)
             # LangGraph returns a dict when using Pydantic models as state
             if isinstance(raw_result, dict):
-                final_state = GraphState(**{k: v for k, v in raw_result.items() if v is not None})
-                # Preserve fields from original state that may be missing from dict
-                if final_state.owner is None:
-                    final_state.owner = state.owner
-                if final_state.repo is None:
-                    final_state.repo = state.repo
+                # Carefully merge — only update fields that are actually set
+                merged = state.model_dump()
+                for k, v in raw_result.items():
+                    if v is not None:
+                        merged[k] = v
+                final_state = GraphState.model_validate(merged)
             else:
                 final_state = raw_result
+
+            # If pipeline produced no verdict, log all errors for diagnosis
+            if final_state.final_verdict is None:
+                logger.error(
+                    "Pipeline completed but produced no verdict. Errors: %s",
+                    final_state.errors,
+                )
+                if final_state.errors:
+                    first_error = final_state.errors[0].get("error", "unknown")
+                    raise RuntimeError(
+                        f"Analysis pipeline failed: {first_error}. "
+                        f"Check that GITHUB_TOKEN has 'repo' scope and the PR URL is accessible."
+                    )
+
+        except RuntimeError:
+            raise
         except Exception as exc:
             logger.error("Graph execution failed: %s", exc, exc_info=True)
             raise RuntimeError(f"Analysis pipeline failed: {exc}") from exc
