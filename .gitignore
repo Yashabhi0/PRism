@@ -76,3 +76,7 @@ frontend/node_modules/
 .next/
 .env
 >>>>>>> e100f537b27e7bca54a736c809e29634022d3aa6
+
+*.env
+.env
+**/.env
