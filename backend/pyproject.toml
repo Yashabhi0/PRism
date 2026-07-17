@@ -3,7 +3,7 @@ name = "prism-ai"
 version = "0.1.0"
 description = "PRism AI - Autonomous Pull Request review platform"
 readme = "README.md"
-requires-python = ">=3.11,<3.13"
+requires-python = ">=3.11,<3.12"
 dependencies = [
     "langgraph",
     "langchain",
@@ -33,7 +33,7 @@ packages = ["ai"]
 
 [tool.ruff]
 line-length = 100
-target-version = "py312"
+target-version = "py311"
 
 [tool.ruff.lint]
 select = [
@@ -47,7 +47,7 @@ select = [
 ignore = []
 
 [tool.mypy]
-python_version = "3.12.13"
+python_version = "3.11"
 warn_return_any = true
 warn_unused_configs = true
 disallow_untyped_defs = true
