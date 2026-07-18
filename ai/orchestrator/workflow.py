@@ -40,7 +40,7 @@ async def diff_parser_node(state: GraphState) -> GraphState:
     t0 = time.perf_counter()
     try:
         from ai.models.pr_context import FileDiff, HunkLine, ParsedDiff
-        from backend.config import get_settings
+        from config import get_settings
         settings = get_settings()
 
         if not state.pull_request_context:
@@ -189,7 +189,7 @@ async def parallel_agents_node(state: GraphState) -> GraphState:
     Runs all 7 specialist agents concurrently.
     Groq free tier has a low TPM cap — agents run one at a time with a short pause.
     """
-    from backend.config import LLMProvider, get_settings
+    from config import LLMProvider, get_settings
 
     t0 = time.perf_counter()
 

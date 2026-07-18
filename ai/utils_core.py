@@ -32,7 +32,7 @@ from tenacity import (
 from ai.models.agent_result import AgentResult, AgentStatus
 from ai.models.graph_state import GraphState
 from ai.models.issues import IssueCategory
-from backend.config import get_settings
+from config import get_settings
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -371,7 +371,7 @@ class BaseAgent(ABC):
     def _get_llm_wrapper(self):
         """Return the appropriate LLM wrapper for the configured provider."""
         from ai.llm import GeminiWrapper, OpenAIWrapper
-        from backend.config import LLMProvider
+        from config import LLMProvider
 
         provider = self._settings.default_llm_provider
 

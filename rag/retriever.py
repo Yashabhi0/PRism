@@ -14,7 +14,7 @@ import logging
 import re
 from typing import Optional
 
-from backend.config import get_settings
+from config import get_settings
 from rag.vector_store import BaseVectorStore, Document, get_vector_store
 
 logger = logging.getLogger("prism.rag.retriever")

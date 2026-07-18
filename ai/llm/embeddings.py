@@ -18,7 +18,7 @@ import logging
 from functools import lru_cache
 from typing import Protocol, runtime_checkable
 
-from backend.config import EmbeddingProvider, get_settings
+from config import EmbeddingProvider, get_settings
 
 logger = logging.getLogger("prism.llm.embeddings")
 

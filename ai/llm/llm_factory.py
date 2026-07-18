@@ -17,7 +17,7 @@ from typing import Optional
 
 from langchain_core.language_models import BaseChatModel
 
-from backend.config import LLMProvider, get_settings
+from config import LLMProvider, get_settings
 
 logger = logging.getLogger("prism.llm.factory")
 

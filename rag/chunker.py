@@ -21,7 +21,7 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Optional
 
-from backend.config import get_settings
+from config import get_settings
 
 # ── Language detection ────────────────────────────────────────────────────────
 

@@ -18,9 +18,9 @@ from langchain_core.messages import HumanMessage, SystemMessage
 from langchain_core.outputs import ChatGeneration
 from pydantic import BaseModel
 
-from backend.config import get_settings
+from config import get_settings
 from .llm_factory import LLMFactory
-from backend.config import LLMProvider
+from config import LLMProvider
 
 logger = logging.getLogger("prism.llm.openai")
 

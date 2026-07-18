@@ -15,7 +15,7 @@ from typing import Any, Optional, Type, TypeVar
 
 from pydantic import BaseModel
 
-from backend.config import get_settings
+from config import get_settings
 
 logger = logging.getLogger("prism.llm.gemini")
 

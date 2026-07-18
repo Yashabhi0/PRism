@@ -15,7 +15,7 @@ import uuid
 from typing import Any, Optional
 
 from ai.llm.embeddings import get_cached_embedding_model
-from backend.config import VectorDBProvider, get_settings
+from config import VectorDBProvider, get_settings
 from rag.chunker import CodeChunk
 
 logger = logging.getLogger("prism.rag.vector_store")

@@ -7,7 +7,7 @@ sys.path.insert(0, ".")
 
 async def main():
     # Use a known public PR from your own account
-    from backend.config import get_settings
+    from config import get_settings
     s = get_settings()
     print(f"Provider: {s.default_llm_provider.value}")
     print(f"Groq key: {'SET' if s.groq_api_key else 'MISSING'}")
@@ -50,7 +50,7 @@ async def main():
 
     # Step 2: run full analysis
     print("\nRunning analysis...")
-    from backend.services.analysis_service import AnalysisService
+    from services.analysis_service import AnalysisService
     service = AnalysisService()
     try:
         result = await service.analyse(
