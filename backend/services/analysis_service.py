@@ -23,8 +23,8 @@ from pydantic import BaseModel, Field
 from ai.models.graph_state import GraphState, MergeVerdict
 from ai.models.agent_result import AgentResult
 from ai.orchestrator.graph import get_graph
-from backend.services.github_service import GitHubService, parse_pr_url
-from backend.services.rag_service import RAGService
+from services.github_service import GitHubService, parse_pr_url
+from services.rag_service import RAGService
 
 logger = logging.getLogger("prism.service.analysis")
 

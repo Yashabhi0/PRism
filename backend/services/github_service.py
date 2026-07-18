@@ -27,7 +27,7 @@ from ai.models.pr_context import (
     PullRequestContext,
     RepositoryContext,
 )
-from backend.config import get_settings
+from config import get_settings
 
 logger = logging.getLogger("prism.service.github")
 

@@ -15,7 +15,7 @@ from __future__ import annotations
 import logging
 from typing import Optional
 
-from backend.services.github_service import GitHubService
+from services.github_service import GitHubService
 from rag.retriever import RepositoryIndexer, PRismRetriever
 from rag.vector_store import get_vector_store
 

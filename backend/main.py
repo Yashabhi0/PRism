@@ -34,9 +34,9 @@ _ROOT = Path(__file__).resolve().parent.parent
 if str(_ROOT) not in sys.path:
     sys.path.insert(0, str(_ROOT))
 
-from backend.config import get_settings
-from backend.services.analysis_service import AnalysisResult, AnalysisService
-from backend.services.github_service import parse_pr_url
+from config import get_settings
+from services.analysis_service import AnalysisResult, AnalysisService
+from services.github_service import parse_pr_url
 
 logger = logging.getLogger("prism.main")
 
@@ -306,7 +306,7 @@ async def reindex_repository(request: ReindexRequest) -> dict:
     Drop and rebuild the vector store index for the given repository.
     Use this when the codebase has changed significantly since the last index.
     """
-    from backend.services.rag_service import RAGService
+    from services.rag_service import RAGService
     service = RAGService()
     try:
         success = await service.reindex(
