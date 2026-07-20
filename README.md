@@ -270,40 +270,13 @@ Refer to the provided `.env.example` files.
 
 ---
 
-# Screenshots
-
-> Add screenshots here
-
-### Landing Page
-
-<p align="center">
-<img src="docs/screenshots/landing.png" width="900"/>
-</p>
-
----
-
-### Dashboard
-
-<p align="center">
-<img src="docs/screenshots/dashboard.png" width="900"/>
-</p>
-
----
-
-### Pull Request Analysis
-
-<p align="center">
-<img src="docs/screenshots/analysis.png" width="900"/>
-</p>
-
----
 
 # API Documentation
 
 Swagger UI
 
 ```
-https://YOUR-RAILWAY.up.railway.app/docs
+prism-production-b0e0.up.railway.app/docs
 ```
 
 ---
