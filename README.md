@@ -40,7 +40,7 @@ The goal is to reduce review time while improving code quality for both maintain
 
 > **Vercel Deployment**
 
-**🔗 https://YOUR-FRONTEND.vercel.app**
+**🔗 https://p-rism-ai.vercel.app/**
 
 ---
 
@@ -48,11 +48,11 @@ The goal is to reduce review time while improving code quality for both maintain
 
 > **Railway Deployment**
 
-**🔗 https://YOUR-RAILWAY.up.railway.app**
+**🔗 prism-production-b0e0.up.railway.app**
 
 Swagger Documentation:
 
-**🔗 https://YOUR-RAILWAY.up.railway.app/docs**
+**🔗 prism-production-b0e0.up.railway.app/docs**
 
 ---
 
