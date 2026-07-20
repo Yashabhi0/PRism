@@ -335,12 +335,6 @@ git push origin feature/amazing-feature
 
 ---
 
-# License
-
-Distributed under the MIT License.
-
----
-
 # Authors
 
 **Yashwanth Abhishek**
